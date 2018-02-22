@@ -1,0 +1,18 @@
+package nuclearscience.gui.container;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import nuclearscience.tile.TileEntityLaptronStorage;
+
+public class ContainerLapotronStorage extends Container{
+	
+	public ContainerLapotronStorage(InventoryPlayer inv, TileEntityLaptronStorage tile) {
+	}
+
+	@Override
+	public boolean canInteractWith(EntityPlayer player) {
+		return false;
+	}
+
+}

@@ -1,0 +1,12 @@
+package nuclearscience.block.item;
+
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+
+public class ItemBlockLapotronStorage extends ItemBlock{
+
+	public ItemBlockLapotronStorage(Block block) {
+		super(block);
+	}
+
+}

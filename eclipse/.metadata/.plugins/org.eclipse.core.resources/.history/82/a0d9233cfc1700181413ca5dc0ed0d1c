@@ -1,0 +1,40 @@
+package nuclearscience.gui;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
+import net.minecraft.util.ResourceLocation;
+import nuclearscience.gui.container.ContainerLapotronStorage;
+
+public class GuiLapotronStorage extends GuiContainer{
+	
+	Minecraft mc = Minecraft.getMinecraft();
+	
+	ResourceLocation gui = new ResourceLocation("nuclearscience:textures/gui/GUILSU.png");
+	
+	int k = (this.width - this.xSize) / 2;
+	int l = (this.height - this.ySize) / 2;
+	
+
+	public GuiLapotronStorage(ContainerLapotronStorage container) {
+		super(container);
+	}
+	
+	@Override
+	public void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+		
+	}
+	
+	@Override
+	public void drawScreen(int par1, int par2, float p_73863_3_) {
+		super.drawScreen(par1, par2, p_73863_3_);
+		
+	}
+	
+	@Override
+	public void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+		mc.renderEngine.bindTexture(gui);
+		drawTexturedModalRect(k, l, 0, 0, xSize, ySize);
+	}
+
+}

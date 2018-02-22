@@ -1,0 +1,52 @@
+package nuclearscience.tile;
+
+import ic2.api.energy.tile.IEnergySink;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+
+public class TileEntityLaptronStorage extends TileEntity implements IEnergySink{
+	
+	public double energy = 0.0D;
+	public double maxEnergy = 10000000.0D;
+	private boolean initialized;
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		if(nbt.hasKey("energy")) {
+			this.energy = nbt.getDouble("energy");
+		}
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setDouble("energy", this.energy);
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();	}
+
+	@Override
+	public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
+		return false;
+	}
+
+	@Override
+	public double getDemandedEnergy() {
+		return 0;
+	}
+
+	@Override
+	public int getSinkTier() {
+		return 0;
+	}
+
+	@Override
+	public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
+		return 0;
+	}
+
+}

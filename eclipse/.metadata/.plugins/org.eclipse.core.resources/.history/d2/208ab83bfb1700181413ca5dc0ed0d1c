@@ -1,0 +1,27 @@
+package nuclearscience.gui.container;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.inventory.Container;
+
+public class ContainerLapotronStorage extends GuiContainer{
+	
+	int k = (this.width - this.xSize) / 2;
+	int l = (this.height - this.ySize) / 2;
+	
+	
+
+	public ContainerLapotronStorage(Container container) {
+		super(container);
+	}
+	
+	@Override
+	public void drawGuiContainerForegroundLayer(int p_146979_1_, int p_146979_2_) {
+		super.drawGuiContainerForegroundLayer(p_146979_1_, p_146979_2_);
+	}
+
+	@Override
+	public void drawGuiContainerBackgroundLayer(float p_146976_1_, int p_146976_2_, int p_146976_3_) {
+		
+	}
+
+}

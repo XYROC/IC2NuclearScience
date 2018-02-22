@@ -1,0 +1,14 @@
+package nuclearscience.block;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.block.Block;
+
+public class NuclearScienceBlocks {
+	
+	public static final Block laptronStorage = new BlockLaptronStorage();
+	
+	public static void registerBlocks() {
+		GameRegistry.registerBlock(laptronStorage, "laptronStorage");
+	}
+	
+}

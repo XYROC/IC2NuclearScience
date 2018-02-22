@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="net.minecraft.block.Block"/>
+<fullyQualifiedTypeName name="net.minecraft.block.BlockContainer"/>
+<fullyQualifiedTypeName name="net.minecraft.creativetab.CreativeTabs"/>
+<fullyQualifiedTypeName name="net.minecraft.item.Item"/>
+<fullyQualifiedTypeName name="net.minecraft.init.Items"/>
+<fullyQualifiedTypeName name="ic2.api.item.IC2Items"/>
+<fullyQualifiedTypeName name="nuclearscience.tab.CreativeTabNuclearScience"/>
+<fullyQualifiedTypeName name="nuclearscience.block.NuclearScienceBlocks"/>
+<fullyQualifiedTypeName name="nuclearscience.NuclearScience"/>
+<fullyQualifiedTypeName name="ic2.api.energy.tile.IEnergySink"/>
+</qualifiedTypeNameHistroy>

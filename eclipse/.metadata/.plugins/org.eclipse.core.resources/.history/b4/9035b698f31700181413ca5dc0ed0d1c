@@ -1,0 +1,91 @@
+package nuclearscience.tile;
+
+import ic2.api.energy.event.EnergyTileLoadEvent;
+import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergyEmitter;
+import ic2.api.energy.tile.IEnergySink;
+import ic2.api.tile.IEnergyStorage;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
+
+public class TileEntityLaptronStorage extends TileEntity implements IEnergySink, IEnergyEmitter {
+
+	public double energy = 0.0D;
+	public double maxEnergy = 10000000.0D;
+
+	private boolean initialized;
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		if (nbt.hasKey("energy")) {
+			this.energy = nbt.getDouble("energy");
+		}
+	}
+
+	public int getOutputSide() {
+		return worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setDouble("energy", this.energy);
+	}
+
+	@Override
+	public void updateEntity() {
+		if (!initialized && worldObj != null) {
+			if (!worldObj.isRemote) {
+				EnergyTileLoadEvent loadEvent = new EnergyTileLoadEvent(this);
+				MinecraftForge.EVENT_BUS.post(loadEvent);
+			}
+			initialized = true;
+		}
+	}
+
+	@Override
+	public void invalidate() {
+		EnergyTileUnloadEvent unloadEvent = new EnergyTileUnloadEvent(this);
+		MinecraftForge.EVENT_BUS.post(unloadEvent);
+	}
+
+	@Override
+	public boolean acceptsEnergyFrom(TileEntity emitter, ForgeDirection direction) {
+		return !direction.equals(ForgeDirection.getOrientation(getOutputSide()));
+	}
+
+	@Override
+	public double getDemandedEnergy() {
+		return this.maxEnergy - this.energy;
+	}
+
+	@Override
+	public int getSinkTier() {
+		return 4;
+	}
+
+	@Override
+	public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
+		if (this.energy >= this.maxEnergy)
+			return amount;
+
+		double demandedEnergy = getDemandedEnergy();
+
+		if (demandedEnergy >= amount) {
+			this.energy += amount;
+			return 0;
+		} else if (amount >= demandedEnergy) {
+			this.energy = this.maxEnergy;
+			return amount - demandedEnergy;
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
+		return false;
+	}
+}

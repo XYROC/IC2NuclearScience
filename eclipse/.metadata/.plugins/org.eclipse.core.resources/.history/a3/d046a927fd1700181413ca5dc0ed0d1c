@@ -1,0 +1,5 @@
+package nuclearscience.block.item;
+
+public class ItemBlockLapotronStorage {
+
+}

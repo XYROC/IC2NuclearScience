@@ -1,0 +1,85 @@
+package nuclearscience.block;
+
+import java.util.ArrayList;
+
+import ic2.api.item.IC2Items;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+import nuclearscience.NuclearScience;
+import nuclearscience.tile.TileEntityLaptronStorage;
+
+public class BlockLapotronStorage extends BlockContainer {
+
+	// BlockRotatedPillar
+
+	protected IIcon[] a;
+
+	public BlockLapotronStorage() {
+		super(Material.iron);
+		setBlockName("lapotronStorage");
+		setCreativeTab(NuclearScience.tab);
+		setHardness(3.0F);
+		setStepSound(soundTypeMetal);
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		a = new IIcon[2];
+		a[0] = register.registerIcon("nuclearscience:lapotronStorageSide");
+		a[1] = register.registerIcon("nuclearscience:lapotronStorageFront");
+	}
+
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		if (meta == side)
+			return a[1];
+		return a[0];
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_,
+			float p_149727_7_, float p_149727_8_, float p_149727_9_) {
+		if (world.isRemote)
+			return true;
+		TileEntityLaptronStorage tile = (TileEntityLaptronStorage) world.getTileEntity(x, y, z);
+		if (tile != null) {
+			player.addChatMessage(new ChatComponentText("Energy: " + tile.energy + " / " + tile.maxEnergy));
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int onBlockPlaced(World p_149660_1_, int p_149660_2_, int p_149660_3_, int p_149660_4_, int p_149660_5_,
+			float p_149660_6_, float p_149660_7_, float p_149660_8_, int p_149660_9_) {
+		return p_149660_5_;
+	}
+
+	@Override
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
+		ArrayList<ItemStack> drops = new ArrayList<ItemStack>();
+		drops.add(IC2Items.getItem("advancedMachine"));
+		;
+		drops.add(new ItemStack(IC2Items.getItem("lapotronCrystal").getItem(), 5));
+		return drops;
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world, int metadata) {
+		return null;
+	}
+
+	@Override
+	public TileEntity createTileEntity(World world, int metadata) {
+		return new TileEntityLaptronStorage();
+	}
+
+}

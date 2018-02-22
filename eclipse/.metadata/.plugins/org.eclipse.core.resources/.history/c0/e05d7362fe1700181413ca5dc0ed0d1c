@@ -1,0 +1,30 @@
+package nuclearscience.gui.container;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
+import nuclearscience.tile.TileEntityLaptronStorage;
+
+public class ContainerLapotronStorage extends Container{
+	
+	public TileEntityLaptronStorage tile;
+	
+	public ContainerLapotronStorage(InventoryPlayer inv, TileEntityLaptronStorage tile) {
+		int i;
+		for (i = 0; i < 3; ++i) {
+			for (int j = 0; j < 9; ++j) {
+				this.addSlotToContainer(new Slot(p_i1812_1_, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+			}
+		}
+
+		for (i = 0; i < 9; ++i) {
+			this.addSlotToContainer(new Slot(p_i1812_1_, i, 8 + i * 18, 142));
+}
+	}
+
+	@Override
+	public boolean canInteractWith(EntityPlayer player) {
+		return false;
+	}
+
+}

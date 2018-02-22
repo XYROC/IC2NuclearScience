@@ -1,0 +1,9 @@
+package nuclearscience.block;
+
+import net.minecraft.block.Block;
+
+public class NuclearScienceBlocks {
+	
+	public static final Block laptronStorage = new BlockLaptronStorage();
+	
+}

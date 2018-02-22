@@ -1,0 +1,20 @@
+package nuclearscience.block;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraft.block.Block;
+import nuclearscience.tile.TileEntityLaptronStorage;
+
+public class NuclearScienceBlocks {
+	
+	public static final Block laptronStorage = new BlockLaptronStorage();
+	
+	public static void registerBlocks() {
+		GameRegistry.registerBlock(laptronStorage, "laptronStorage");
+		
+		GameRegistry.registerTileEntity(TileEntityLaptronStorage.class, "laptronStorage");
+		
+		LanguageRegistry.addName(laptronStorage, "LaptronStorage");
+	}
+	
+}

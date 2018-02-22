@@ -1,0 +1,5 @@
+package nuclearscience.gui.container;
+
+public class ContainerLapotronStorage {
+
+}
