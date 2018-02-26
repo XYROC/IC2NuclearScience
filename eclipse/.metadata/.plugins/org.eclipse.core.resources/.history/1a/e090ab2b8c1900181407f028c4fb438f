@@ -1,0 +1,9 @@
+package nuclearscience.proxy;
+
+public class CommonProxy {
+	
+	public void load() {
+		
+	}
+
+}

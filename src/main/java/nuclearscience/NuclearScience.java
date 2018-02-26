@@ -5,17 +5,27 @@ import org.apache.logging.log4j.Logger;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.ModMetadata;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import nuclearscience.block.NuclearScienceBlocks;
+import nuclearscience.proxy.CommonProxy;
 import nuclearscience.tab.CreativeTabNuclearScience;
 import nuclearscience.util.GuiHandler;
 
-@Mod(modid = "IC2NuclearScience", name = "", version = "", dependencies = "required-after:IC2@2.2.828")
+@Mod(modid = NuclearScience.name, name = "", version = "", dependencies = "required-after:IC2@2.2.828")
 public class NuclearScience {
+	
+	public static final String name = "IC2NuclearScience";
 	
 	@Instance
 	public static NuclearScience instance;
+	
+	@SidedProxy(serverSide = "nuclearscience.proxy.CommonProxy", clientSide = "nuclearscience.proxy.ClientProxy")
+	public static CommonProxy proxy;
+	
+	public static FMLEventChannel dataChannel;
 	
 	public static Logger logger;
 	
@@ -32,6 +42,9 @@ public class NuclearScience {
 	public void init(FMLPreInitializationEvent event) {
 		NuclearScienceBlocks.registerBlocks();
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
+		dataChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(NuclearScience.name);
+		proxy.load();
+		
 	}
 
 	@Mod.EventHandler

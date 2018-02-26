@@ -1,0 +1,118 @@
+package nuclearscience.tile;
+
+import java.io.IOException;
+
+import ic2.api.energy.event.EnergyTileLoadEvent;
+import ic2.api.energy.event.EnergyTileUnloadEvent;
+import ic2.api.energy.tile.IEnergyEmitter;
+import ic2.api.energy.tile.IEnergySink;
+import ic2.api.energy.tile.IEnergySource;
+import ic2.api.tile.IEnergyStorage;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetHandler;
+import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
+import nuclearscience.NuclearScience;
+import nuclearscience.network.Packets;
+
+public class TileEntityLaptronStorage extends TileEntityEnergyStorage {
+
+	public TileEntityLaptronStorage(double maxEnergy, int sinkTier) {
+		super(maxEnergy, sinkTier);
+	}
+	
+	public void sendSyncPacket() throws IOException {
+		if(!worldObj.isRemote) {
+			NuclearScience.dataChannel.sendToAll(Packets.createTileEnergyPacket(this));
+		}
+	}
+
+	public int getOutputSide() {
+		return worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public double injectEnergy(ForgeDirection directionFrom, double amount, double voltage) {
+		if (this.energy >= this.maxEnergy)
+			return amount;
+
+		double demandedEnergy = getDemandedEnergy();
+
+		if (demandedEnergy >= amount) {
+			this.energy += amount;
+			return 0;
+		} else if (amount >= demandedEnergy) {
+			this.energy = this.maxEnergy;
+			return amount - demandedEnergy;
+		}
+		try {
+			sendSyncPacket();
+		} catch (IOException e) {
+			NuclearScience.error("FAILED to send tileEntity data to client");
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean emitsEnergyTo(TileEntity receiver, ForgeDirection direction) {
+		return direction.equals(ForgeDirection.getOrientation(getOutputSide()));
+	}
+
+	@Override
+	public double getOfferedEnergy() {
+		return Math.min(energy, 4096.0D);
+	}
+
+	@Override
+	public void drawEnergy(double amount) {
+		this.energy -= amount;
+	}
+
+	@Override
+	public int getSourceTier() {
+		return 4;
+	}
+
+	@Override
+	public int getStored() {
+		return (int) energy;
+	}
+
+	@Override
+	public void setStored(int energy) {
+		this.energy = energy;
+	}
+
+	@Override
+	public int addEnergy(int amount) {
+		if (energy + amount > this.maxEnergy) {
+			this.energy = this.maxEnergy;
+		}
+		this.energy += energy;
+		return (int) energy;
+	}
+
+	@Override
+	public int getCapacity() {
+		return (int) this.maxEnergy;
+	}
+
+	@Override
+	public int getOutput() {
+		return 4096;
+	}
+
+	@Override
+	public double getOutputEnergyUnitsPerTick() {
+		return 4096;
+	}
+
+	@Override
+	public boolean isTeleporterCompatible(ForgeDirection side) {
+		return false;
+	}
+}

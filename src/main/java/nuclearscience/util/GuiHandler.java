@@ -5,6 +5,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import nuclearscience.NuclearScience;
 import nuclearscience.gui.GuiLapotronStorage;
 import nuclearscience.gui.NuclearScienceGUI;
 import nuclearscience.gui.container.ContainerLapotronStorage;
@@ -28,7 +29,7 @@ public class GuiHandler implements IGuiHandler {
 		switch (ID) {
 		case NuclearScienceGUI.lapotronStorage:
 			return new GuiLapotronStorage(new ContainerLapotronStorage(player.inventory,
-					(TileEntityLaptronStorage) world.getTileEntity(x, y, z)));
+					(TileEntityLaptronStorage) world.getTileEntity(x, y, z)), new AdvancedPosition(world, x, y, z));
 		default:
 			return null;
 		}

@@ -1,0 +1,5 @@
+package nuclearscience.network;
+
+public class ServerPacketHander {
+
+}

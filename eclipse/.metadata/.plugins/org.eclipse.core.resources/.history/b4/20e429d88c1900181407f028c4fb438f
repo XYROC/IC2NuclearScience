@@ -1,0 +1,19 @@
+package nuclearscience.network;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent.ServerCustomPacketEvent;
+import nuclearscience.NuclearScience;
+
+public class ServerPacketHander {
+	
+	protected String channelName;
+	
+	@SubscribeEvent
+	public void onServerPacket(ServerCustomPacketEvent event) {
+		this.channelName = event.packet.channel();
+		if(channelName.equals(NuclearScience.name)) {
+			
+		}
+	}
+
+}

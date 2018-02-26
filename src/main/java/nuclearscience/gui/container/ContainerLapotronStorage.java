@@ -15,18 +15,20 @@ public class ContainerLapotronStorage extends Container{
 		int i;
 		for (i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
-				this.addSlotToContainer(new Slot(inv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+				this.addSlotToContainer(new Slot(inv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18 -5));
 			}
 		}
 
 		for (i = 0; i < 9; ++i) {
-			this.addSlotToContainer(new Slot(inv, i, 8 + i * 18, 142));
+			this.addSlotToContainer(new Slot(inv, i, 8 + i * 18, 142 -5));
 }
 	}
 
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return false;
+		return true;
 	}
+	
+	
 
 }

@@ -1,0 +1,13 @@
+package nuclearscience.proxy;
+
+import nuclearscience.NuclearScience;
+import nuclearscience.network.ClientPacketHandler;
+
+public class ClientProxy extends CommonProxy{
+
+	@Override
+	public void load() {
+		NuclearScience.tileDataChannel.register(new ClientPacketHandler());
+	}
+	
+}

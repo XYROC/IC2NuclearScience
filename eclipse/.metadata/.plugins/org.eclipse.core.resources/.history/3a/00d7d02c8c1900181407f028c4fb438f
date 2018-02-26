@@ -1,0 +1,13 @@
+package nuclearscience.proxy;
+
+import cpw.mods.fml.common.network.NetworkRegistry;
+import nuclearscience.NuclearScience;
+
+public class CommonProxy {
+	
+	public void load() {
+		NuclearScience.tileDataChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(NuclearScience.name);
+
+	}
+
+}

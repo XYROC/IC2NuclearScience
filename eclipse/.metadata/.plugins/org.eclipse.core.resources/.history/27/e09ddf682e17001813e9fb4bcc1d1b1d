@@ -1,7 +1,0 @@
-package nuclearscience.tile;
-
-import net.minecraft.tileentity.TileEntity;
-
-public class TileEntityLaptronStorage extends TileEntity {
-
-}
