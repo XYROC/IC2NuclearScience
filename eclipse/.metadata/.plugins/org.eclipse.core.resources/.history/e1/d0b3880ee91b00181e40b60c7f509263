@@ -1,0 +1,9 @@
+package nuclearscience.item;
+
+public class NuclearScienceItems {
+	
+	public static void load() {
+		
+	}
+
+}

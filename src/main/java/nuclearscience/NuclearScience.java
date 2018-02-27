@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import nuclearscience.block.NuclearScienceBlocks;
+import nuclearscience.item.NuclearScienceItems;
 import nuclearscience.proxy.CommonProxy;
 import nuclearscience.tab.CreativeTabNuclearScience;
 import nuclearscience.util.GuiHandler;
@@ -40,17 +41,15 @@ public class NuclearScience {
 	
 	@Mod.EventHandler
 	public void init(FMLPreInitializationEvent event) {
+		NuclearScienceItems.registerItems();
 		NuclearScienceBlocks.registerBlocks();
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 		dataChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(NuclearScience.name);
 		proxy.load();
-		
 	}
 
 	@Mod.EventHandler
-	public void postInit(FMLPreInitializationEvent event) {
-
-	}
+	public void postInit(FMLPreInitializationEvent event) {}
 	
 	public static void log(String message) {
 		logger.info(message);

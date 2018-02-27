@@ -1,0 +1,17 @@
+package nuclearscience.item;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraft.item.Item;
+
+public class NuclearScienceItems {
+	
+	public static final Item lapotronStorgageUnit = new ItemLapotronStorageUnit();
+	
+	public static void load() {
+		GameRegistry.registerItem(lapotronStorgageUnit, "lapotronStorageUnit");
+		
+		LanguageRegistry.addName(lapotronStorgageUnit, "Lapotron Storage Unit");
+	}
+
+}
