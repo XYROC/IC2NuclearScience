@@ -1,0 +1,27 @@
+package nuclearscience.tile;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import nuclearscience.NuclearScience;
+import nuclearscience.util.AdvancedPosition;
+
+public class TileEntityTest extends TileEntity{
+	
+	@Override
+	public void writeToNBT(NBTTagCompound p_145841_1_) {
+		// TODO Auto-generated method stub
+		super.writeToNBT(p_145841_1_);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound p_145839_1_) {
+		// TODO Auto-generated method stub
+		super.readFromNBT(p_145839_1_);
+	}
+	
+	public AdvancedPosition getPos() {
+		NuclearScience.log(" "+worldObj+" | "+xCoord+ " | "+yCoord+" | "+zCoord);
+		return new AdvancedPosition(worldObj, xCoord, yCoord, zCoord);
+	}
+
+}

@@ -57,7 +57,6 @@ public class TileEntityEnergyStorage extends TileEntity implements IEnergySink, 
 
 	public void sendSyncPacket() {
 		if (!worldObj.isRemote) {
-			NuclearScience.log(this + " " + xCoord + " / " + yCoord + " / " + zCoord + "   "+energy);
 			try {
 				NuclearScience.dataChannel.sendToDimension(Packets.createTileEnergyPacket(this),
 						worldObj.provider.dimensionId);

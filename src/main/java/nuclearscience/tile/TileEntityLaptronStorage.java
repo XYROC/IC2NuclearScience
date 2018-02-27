@@ -23,4 +23,5 @@ public class TileEntityLaptronStorage extends TileEntityEnergyStorage {
 	public TileEntityLaptronStorage() {
 		super(100000000.0D, 4, 4096);
 	}
+	
 }

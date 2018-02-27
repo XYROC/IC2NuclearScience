@@ -33,7 +33,9 @@ public class GuiLapotronStorage extends GuiContainer {
 		tile = (TileEntityLaptronStorage) tilePos.getTileEntity();
 		int energy = tile.getStored();
 		int maxEnergy = tile.getCapacity();
-		double length = (double) energy / (double) maxEnergy * 24;
+		double filled = (double) energy / (double) maxEnergy;
+		double length = filled * 23;
+		if(filled > 0.0D) length += 1.0D;
 		ElementSimpleScaled energyBar = new ElementSimpleScaled(gui, 75, 34, (int) length, 17, 176, 14);
 		energyBar.draw(this);
 	}

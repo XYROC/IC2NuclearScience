@@ -14,22 +14,19 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import nuclearscience.NuclearScience;
 import nuclearscience.tile.TileEntityEnergyStorage;
+import nuclearscience.tile.TileEntityLaptronStorage;
 
 public class Packets {
 
 	public static final int packetTileData = 0;
 
 	public static FMLProxyPacket createTileEnergyPacket(TileEntityEnergyStorage tile) throws IOException {
-		NBTTagCompound nbt = new NBTTagCompound();
-		tile.readFromNBT(nbt);
 		ByteBufOutputStream bbos = new ByteBufOutputStream(Unpooled.buffer());
 		bbos.writeInt(packetTileData);
-		//NuclearScience.log("Writing :"+tile.xCoord+ " / "+tile.yCoord+ " / "+tile.zCoord+" / "+tile.energy +" ("+tile.getWorldObj().isRemote+")");
 		bbos.writeInt(tile.xCoord);
 		bbos.writeInt(tile.yCoord);
 		bbos.writeInt(tile.zCoord);
 		bbos.writeDouble(tile.energy);
-		//NuclearScience.log("Written :"+tile.xCoord+ " / "+tile.yCoord+ " / "+tile.zCoord+" / "+tile.energy +" ("+tile.getWorldObj().isRemote+")");
 		FMLProxyPacket packet = new FMLProxyPacket(bbos.buffer(), NuclearScience.name);
 		bbos.close();
 		return packet;
@@ -37,22 +34,19 @@ public class Packets {
 
 	public static void processPacketOnClientSide(ByteBuf parBB, Side parSide) throws IOException {
 		if (parSide == Side.CLIENT) {
-
 			World world = Minecraft.getMinecraft().theWorld;
 			ByteBufInputStream bbis = new ByteBufInputStream(parBB);
-
 			int packetTypeID = bbis.readInt();
-
 			switch (packetTypeID) {
 			case packetTileData: {
 				int x = bbis.readInt();
 				int y = bbis.readInt();
 				int z = bbis.readInt();
-				double energy = bbis.readInt();
-				NuclearScience.log("Data recieved: " + x + " / " + y + " / " + z + " / " + energy);
-				TileEntityEnergyStorage tile = (TileEntityEnergyStorage) world.getTileEntity(x, y, z);
-				if(tile == null) {
-					NuclearScience.error("FAILED to update tileEntity: invalid packet. "+tile );
+				double energy = bbis.readDouble();
+				TileEntityEnergyStorage tile = (TileEntityEnergyStorage) Minecraft.getMinecraft().theWorld
+						.getTileEntity(x, y, z);
+				if (tile == null) {
+					NuclearScience.warn("Failed to update tileEntity: tileEntity is null");
 					bbis.close();
 					return;
 				}

@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import nuclearscience.NuclearScience;
 import nuclearscience.gui.NuclearScienceGUI;
 import nuclearscience.tile.TileEntityLaptronStorage;
+import nuclearscience.util.AdvancedPosition;
 
 public class BlockLapotronStorage extends BlockContainer {
 
@@ -47,6 +48,7 @@ public class BlockLapotronStorage extends BlockContainer {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int p_149727_6_,
 			float p_149727_7_, float p_149727_8_, float p_149727_9_) {
 		TileEntity tile = world.getTileEntity(x, y, z);
+		if(world.isRemote) return true;
 		if (tile instanceof TileEntityLaptronStorage) {
 			player.openGui(NuclearScience.instance, NuclearScienceGUI.lapotronStorage, world, x, y, z);
 			return true;
