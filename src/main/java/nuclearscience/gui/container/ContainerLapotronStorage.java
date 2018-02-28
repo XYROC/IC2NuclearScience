@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import nuclearscience.tile.TileEntityLaptronStorage;
 
 public class ContainerLapotronStorage extends Container{
@@ -29,6 +30,12 @@ public class ContainerLapotronStorage extends Container{
 		return true;
 	}
 	
+	@Override
+	protected boolean mergeItemStack(ItemStack p_75135_1_, int p_75135_2_, int p_75135_3_, boolean p_75135_4_) {
+		return false;
+	}
 	
-
+	@Override
+	protected void retrySlotClick(int p_75133_1_, int p_75133_2_, boolean p_75133_3_, EntityPlayer p_75133_4_) {}
+	
 }

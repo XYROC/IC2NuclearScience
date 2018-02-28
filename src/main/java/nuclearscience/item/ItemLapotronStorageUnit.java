@@ -10,25 +10,23 @@ import ic2.api.item.IItemHudInfo;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import nuclearscience.NuclearScience;
 
-public class ItemLapotronStorageUnit extends Item implements IElectricItem, IItemHudInfo, IElectricItemManager {
+public class ItemLapotronStorageUnit extends ItemEnergyStorage {
 
 	private IIcon[] icons;
 
-	private double maxEnergy;
-
 	public ItemLapotronStorageUnit() {
-		maxEnergy = 50000000;
+		super(50000000.0D, 2048.0D, 4);
 		icons = new IIcon[6];
-		setMaxDamage(27);
-		setMaxStackSize(1);
-		setNoRepair();
+		setCreativeTab(NuclearScience.tab);
 	}
 
 	@Override
@@ -39,167 +37,25 @@ public class ItemLapotronStorageUnit extends Item implements IElectricItem, IIte
 	}
 
 	@Override
-	public IIcon getIcon(ItemStack stack, int pass) {
-		double energy = readFromNbt(stack);
-		if (energy >= 50000000.0D)
-			return icons[5];
-		else if (energy >= 40000000.0D)
-			return icons[4];
-		else if (energy >= 30000000.0D)
-			return icons[3];
-		else if (energy >= 20000000.0D)
-			return icons[2];
-		else if (energy >= 10000000.0D)
-			return icons[1];
-		return icons[0];
-	}
-
-	@Override
 	public IIcon getIconFromDamage(int damage) {
-		if (damage >= 27)
-			return icons[5];
-		else if (damage >= 22)
-			return icons[4];
-		else if (damage >= 17)
-			return icons[3];
-		else if (damage >= 12)
-			return icons[2];
-		else if (damage >= 7)
-			return icons[1];
-		else if (damage <= 1)
+		if (damage >= 21)
 			return icons[0];
+		else if (damage >= 16)
+			return icons[1];
+		else if (damage >= 11)
+			return icons[2];
+		else if (damage >= 6)
+			return icons[3];
+		else if (damage > 1)
+			return icons[4];
+		else if (damage == 1)
+			return icons[5];
 		return icons[0];
 	}
 
-	public static void writeToNbt(ItemStack itemStack, double energy) {
-		NBTTagCompound nbt = itemStack.getTagCompound();
-		if (nbt == null) {
-			itemStack.setTagCompound(new NBTTagCompound());
-			nbt = itemStack.getTagCompound();
-		}
-		nbt.setDouble("energy", energy);
-	}
-
-	public static void addEnergy(ItemStack itemStack, double amount) {
-		writeToNbt(itemStack, readFromNbt(itemStack) + amount);
-	}
-
-	public static double readFromNbt(ItemStack itemStack) {
-		NBTTagCompound nbt = itemStack.getTagCompound();
-		if (nbt == null) {
-			writeToNbt(itemStack, 0);
-			nbt = itemStack.getTagCompound();
-		}
-		if (nbt.hasKey("energy"))
-			return nbt.getDouble("energy");
-		NuclearScience.error("Failed to read energy from item " + itemStack + ". No energy NBT-Tag found.");
-		return 0;
-	}
-
-	/*@Override
-	public int getDamage(ItemStack stack) {
-		double energy = readFromNbt(stack);
-		if (energy <= 0.0D)
-			return 27;
-		double var = energy / getMaxCharge(stack);
-		return (int) var - 27;
-	}*/
-
 	@Override
-	public boolean canProvideEnergy(ItemStack itemStack) {
-		return true;
-	}
-
-	@Override
-	public Item getChargedItem(ItemStack itemStack) {
-		return this;
-	}
-
-	@Override
-	public Item getEmptyItem(ItemStack itemStack) {
-		return this;
-	}
-
-	@Override
-	public double getMaxCharge(ItemStack itemStack) {
-		return maxEnergy;
-	}
-
-	@Override
-	public int getTier(ItemStack itemStack) {
-		return 4;
-	}
-
-	@Override
-	public double getTransferLimit(ItemStack itemStack) {
-		return 2048.0D;
-	}
-
-	@Override
-	public List<String> getHudInfo(ItemStack itemStack) {
-		List<String> info = new LinkedList();
-		info.add(ElectricItem.manager.getToolTip(itemStack));
-		return info;
-	}
-
-	@Override
-	public double charge(ItemStack stack, double amount, int tier, boolean ignoreTransferLimit, boolean simulate) {
-		double energy = readFromNbt(stack);
-		if (energy >= this.maxEnergy)
-			return 0;
-
-		double demandedEnergy = getDemandedEnergy(stack);
-
-		if (demandedEnergy >= amount) {
-			addEnergy(stack, amount);
-			return amount;
-		} else if (amount >= demandedEnergy) {
-			addEnergy(stack, demandedEnergy);
-			return demandedEnergy;
-		}
-		return 0;
-	}
-
-	@Override
-	public double discharge(ItemStack stack, double amount, int tier, boolean ignoreTransferLimit, boolean externally,
-			boolean simulate) {
-		double energy = readFromNbt(stack);
-		writeToNbt(stack, energy - amount);
-		return amount;
-	}
-
-	@Override
-	public double getCharge(ItemStack stack) {
-		return readFromNbt(stack);
-	}
-
-	@Override
-	public boolean canUse(ItemStack stack, double amount) {
-		return false;
-	}
-
-	@Override
-	public boolean use(ItemStack stack, double amount, EntityLivingBase entity) {
-		return false;
-	}
-
-	@Override
-	public void chargeFromArmor(ItemStack stack, EntityLivingBase entity) {
-	}
-
-	@Override
-	public String getToolTip(ItemStack stack) {
-		return null;
-	}
-	
-	@Override
-	public void addInformation(ItemStack stack, EntityPlayer p_77624_2_, List list, boolean p_77624_4_) {
-		list.add("Store: "+readFromNbt(stack)+" / 50M EU");
-		list.add("In / Output: 2048 EU/t");
-	}
-
-	public double getDemandedEnergy(ItemStack itemStack) {
-		return this.maxEnergy - readFromNbt(itemStack);
+	public EnumRarity getRarity(ItemStack itemStack) {
+		return EnumRarity.epic;
 	}
 
 }

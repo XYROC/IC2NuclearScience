@@ -21,6 +21,8 @@ import nuclearscience.NuclearScience;
 import nuclearscience.network.Packets;
 
 public class TileEntityEnergyStorage extends TileEntity implements IEnergySink, IEnergySource, IEnergyStorage {
+	
+	private static int updateTimer = 0;
 
 	public double energy = 0.0D;
 	public double maxEnergy = 0.0D;
@@ -36,6 +38,8 @@ public class TileEntityEnergyStorage extends TileEntity implements IEnergySink, 
 		this.tier = tier;
 		this.output = output;
 	}
+	
+
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -80,6 +84,11 @@ public class TileEntityEnergyStorage extends TileEntity implements IEnergySink, 
 				MinecraftForge.EVENT_BUS.post(loadEvent);
 			}
 			initialized = true;
+		}
+		updateTimer++;
+		if(updateTimer >= 5) {
+			updateTimer = 0;
+			sendSyncPacket();
 		}
 	}
 

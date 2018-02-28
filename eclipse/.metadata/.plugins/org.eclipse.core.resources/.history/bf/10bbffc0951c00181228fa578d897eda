@@ -1,0 +1,20 @@
+package nuclearscience.util;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import ic2.api.item.IC2Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import nuclearscience.item.NuclearScienceItems;
+
+public class NuclearScienceRecipies {
+
+	public static void registerRecipies() {
+		ItemStack lapotronCrystal = IC2Items.getItem("lapotronCrystal");
+		lapotronCrystal.setItemDamage(26);
+		
+		GameRegistry.addRecipe(new ShapedOreRecipe(NuclearScienceItems.lapotronStorgageUnit, "lcl", "mlm", "lml", 'l',
+				lapotronCrystal, 'm', IC2Items.getItem("plateadviron"), 'c', "ingotCopper"));
+	}
+
+}

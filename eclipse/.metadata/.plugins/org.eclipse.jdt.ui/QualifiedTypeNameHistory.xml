@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="net.minecraft.client.gui.GuiScreen"/>
-<fullyQualifiedTypeName name="net.minecraft.client.gui.GuiChat"/>
-<fullyQualifiedTypeName name="net.minecraft.client.gui.inventory.GuiContainer"/>
-<fullyQualifiedTypeName name="net.minecraft.util.ResourceLocation"/>
-<fullyQualifiedTypeName name="net.minecraft.inventory.Container"/>
-<fullyQualifiedTypeName name="nuclearscience.util.ElementSimpleScaled"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="net.minecraft.item.ItemBlock"/>
-<fullyQualifiedTypeName name="nuclearscience.block.item.ItemBlockLapotronStorage"/>
-<fullyQualifiedTypeName name="net.minecraft.entity.player.InventoryPlayer"/>
-<fullyQualifiedTypeName name="net.minecraft.inventory.Slot"/>
-<fullyQualifiedTypeName name="cpw.mods.fml.common.network.IGuiHandler"/>
 <fullyQualifiedTypeName name="com.sun.org.apache.bcel.internal.generic.NEW"/>
 <fullyQualifiedTypeName name="nuclearscience.gui.container.ContainerLapotronStorage"/>
 <fullyQualifiedTypeName name="nuclearscience.gui.GuiLapotronStorage"/>
@@ -31,13 +18,10 @@
 <fullyQualifiedTypeName name="cpw.mods.fml.common.eventhandler.SubscribeEvent"/>
 <fullyQualifiedTypeName name="io.netty.buffer.ByteBufOutputStream"/>
 <fullyQualifiedTypeName name="io.netty.buffer.Unpooled"/>
-<fullyQualifiedTypeName name="cpw.mods.fml.common.network.internal.FMLProxyPacket"/>
 <fullyQualifiedTypeName name="cpw.mods.fml.relauncher.Side"/>
 <fullyQualifiedTypeName name="nuclearscience.network.Packets"/>
-<fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
 <fullyQualifiedTypeName name="net.minecraft.world.WorldServer"/>
 <fullyQualifiedTypeName name="net.minecraft.block.BlockContainer"/>
-<fullyQualifiedTypeName name="net.minecraft.util.ChatComponentText"/>
 <fullyQualifiedTypeName name="net.minecraft.tileentity.TileEntity"/>
 <fullyQualifiedTypeName name="nuclearscience.util.AdvancedPosition"/>
 <fullyQualifiedTypeName name="nuclearscience.block.BlockTest"/>
@@ -51,13 +35,29 @@
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="ic2.api.item.ElectricItem"/>
 <fullyQualifiedTypeName name="net.minecraft.item.Item"/>
-<fullyQualifiedTypeName name="cpw.mods.fml.common.registry.GameRegistry"/>
 <fullyQualifiedTypeName name="cpw.mods.fml.common.registry.LanguageRegistry"/>
-<fullyQualifiedTypeName name="nuclearscience.block.NuclearScienceBlocks"/>
-<fullyQualifiedTypeName name="nuclearscience.item.NuclearScienceItems"/>
 <fullyQualifiedTypeName name="nuclearscience.NuclearScience"/>
 <fullyQualifiedTypeName name="net.minecraft.util.IIcon"/>
 <fullyQualifiedTypeName name="nuclearscience.item.ItemLapotronStorageUnit"/>
 <fullyQualifiedTypeName name="net.minecraft.nbt.NBTTagCompound"/>
 <fullyQualifiedTypeName name="ic2.api.item.IElectricItemManager"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.network.internal.FMLProxyPacket"/>
+<fullyQualifiedTypeName name="nuclearscience.item.ItemElectricStorage"/>
+<fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+<fullyQualifiedTypeName name="java.util.UUID"/>
+<fullyQualifiedTypeName name="net.minecraft.entity.player.EntityPlayer"/>
+<fullyQualifiedTypeName name="net.minecraft.inventory.IInventory"/>
+<fullyQualifiedTypeName name="net.minecraft.inventory.Container"/>
+<fullyQualifiedTypeName name="net.minecraft.inventory.Slot"/>
+<fullyQualifiedTypeName name="nuclearscience.item.ItemEnergyStorage"/>
+<fullyQualifiedTypeName name="net.minecraft.item.EnumRarity"/>
+<fullyQualifiedTypeName name="net.minecraft.util.ChatComponentText"/>
+<fullyQualifiedTypeName name="cpw.mods.fml.common.registry.GameRegistry"/>
+<fullyQualifiedTypeName name="nuclearscience.item.NuclearScienceItems"/>
+<fullyQualifiedTypeName name="net.minecraft.item.ItemStack"/>
+<fullyQualifiedTypeName name="ic2.api.item.IC2Items"/>
+<fullyQualifiedTypeName name="net.minecraftforge.oredict.OreDictionary"/>
+<fullyQualifiedTypeName name="nuclearscience.util.NuclearScienceRecipies"/>
+<fullyQualifiedTypeName name="nuclearscience.block.NuclearScienceBlocks"/>
+<fullyQualifiedTypeName name="net.minecraftforge.oredict.ShapedOreRecipe"/>
 </qualifiedTypeNameHistroy>

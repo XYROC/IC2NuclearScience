@@ -1,6 +1,7 @@
 package nuclearscience.network;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
@@ -9,12 +10,14 @@ import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import nuclearscience.NuclearScience;
+import nuclearscience.item.ItemEnergyStorage;
 import nuclearscience.tile.TileEntityEnergyStorage;
-import nuclearscience.tile.TileEntityLaptronStorage;
 
 public class Packets {
 
@@ -46,14 +49,14 @@ public class Packets {
 				TileEntityEnergyStorage tile = (TileEntityEnergyStorage) Minecraft.getMinecraft().theWorld
 						.getTileEntity(x, y, z);
 				if (tile == null) {
-					NuclearScience.warn("Failed to update tileEntity: tileEntity is null");
+					NuclearScience.warn("Failed to update tileEntity (nullPointer)");
 					bbis.close();
 					return;
 				}
 				tile.energy = energy;
+				break;
 			}
 			}
-
 			bbis.close();
 		}
 	}
